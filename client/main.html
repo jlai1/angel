@@ -1,0 +1,104 @@
+<head>
+  <title>angel_trading</title>
+</head>
+
+<body>
+  <h1 class="display-4">Angel Trading - Live Dashboard</h1>
+  {{> dashboard}}
+</body>
+
+
+<template name="dashboard">
+  <h1 align="right">Value: ${{portfolioValue}}, Cost: ${{portfolioCost}}</h1>
+  <h1 align="right">Δ: ${{portfolioDelta}}, Δ%: {{portfolioDeltaPercent}}% </h1>
+  <div class="form-group">
+    <!-- <input type="text" class="form-control" id="ticker_searchbox"> -->
+    <input id="ticker_searchbox" type="text" class="form-control"/>
+  </div>
+  <table id="ticker_table" class="table table-bordered table-inverse tablesorter">
+    <thead>
+      <tr id="ticker_table_header">
+        <th>#</th>
+        <th>Symbol</th>
+        <th>Name</th>
+        <th>Sector</th>
+        <th>Industry</th>
+        <th>Date</th>
+        <th>Current Price ($)</th>
+        <th>50 days ave ($)</th>
+        <th>Dividend Yield (%)</th>
+        <th>Return on Equity (%)</th>
+        <th>Position</th>
+        <th>Size</th>
+        <th>Exec Price</th>
+        <th>Yield (%)</th>
+        <th>Yield ($)</th>
+
+      </tr>
+    </thead>
+    <tbody>
+
+      {{#each tickers}}
+        <tr>
+          <th scope="row">{{@index}}</th>
+          <td><a href="https://finance.yahoo.com/quote/{{ticker.symbol}}" target="_blank">{{ticker.symbol}}</a></td>
+          <td>{{ticker.name}}</td>
+          <td>{{ticker.category}}</td>
+          <td>{{ticker.subCategory}}</td>
+          <td>{{ticker.date}}</td>
+          <td>{{ticker.currentPrice}}</td>
+          <td>{{ticker.price_day50}}</td>
+          <td>{{ticker.dividend}}</td>
+          <td>{{ticker.roe}}</td>
+          <td>{{ticker.position}}</td>
+          <td>{{ticker.size}}</td>
+          <td>{{ticker.execPrice}}</td>
+          <td>{{ticker.yieldPercent}}</td>
+          <td>{{ticker.yieldGain}}</td>
+        </tr>
+      {{/each}}
+<!-- 
+      <tr>
+        <th scope="row">1</th>
+        <td>{{ticker.name}}</td>
+        <td>{{ticker.price}}</td>
+        <td>{{ticker.dividend}}</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Coca-Cola</td>
+        <td>45.88</td>
+        <td>3.24</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>Target</td>
+        <td>65.25</td>
+        <td>3.79</td>
+      </tr> -->
+    </tbody>
+  </table>
+
+<!--       {{#each tasks}}
+        {{> task}}
+      {{/each}} -->
+
+<!--   <button type="button" class="btn btn-primary btn-lg">Trade</button>
+  <button type="button" class="btn btn-secondary btn-lg">Cancel</button> -->
+
+</template>
+
+<template name="hello">
+  <button>Click Me</button>
+  <p>You've pressed the button {{counter}} times.</p>
+</template>
+
+<template name="info">
+  <h2>Learn Meteor!</h2>
+  <ul>
+    <li><a href="https://www.meteor.com/try" target="_blank">Do the Tutorial</a></li>
+    <li><a href="http://guide.meteor.com" target="_blank">Follow the Guide</a></li>
+    <li><a href="https://docs.meteor.com" target="_blank">Read the Docs</a></li>
+    <li><a href="https://forums.meteor.com" target="_blank">Discussions</a></li>
+  </ul>
+</template>
