@@ -13,12 +13,13 @@
   <h1 align="right">Δ: ${{portfolioDelta}}, Δ%: {{portfolioDeltaPercent}}% </h1>
   <div class="form-group">
     <!-- <input type="text" class="form-control" id="ticker_searchbox"> -->
-    <input id="ticker_searchbox" type="text" class="form-control"/>
+    <input id="ticker_searchbox" type="text" class="form-control"/><button type="button" id="ml_model_button" class="btn btn-outline-info">Training ML</button><button type="button" id="run_ml_button" class="btn btn-outline-info">Run ML</button>
   </div>
   <table id="ticker_table" class="table table-bordered table-inverse tablesorter">
     <thead>
       <tr id="ticker_table_header">
         <th>#</th>
+        <th>Follow</th>
         <th>Symbol</th>
         <th>Name</th>
         <th>Sector</th>
@@ -33,6 +34,7 @@
         <th>Exec Price</th>
         <th>Yield (%)</th>
         <th>Yield ($)</th>
+        <th>ML</th>
 
       </tr>
     </thead>
@@ -41,6 +43,7 @@
       {{#each tickers}}
         <tr>
           <th scope="row">{{@index}}</th>
+          <td><button type="button" id="follow_button_{{@index}}" class="btn btn-outline-secondary follow_button">Follow</button></td>
           <td><a href="https://finance.yahoo.com/quote/{{ticker.symbol}}" target="_blank">{{ticker.symbol}}</a></td>
           <td>{{ticker.name}}</td>
           <td>{{ticker.category}}</td>
@@ -55,6 +58,7 @@
           <td>{{ticker.execPrice}}</td>
           <td>{{ticker.yieldPercent}}</td>
           <td>{{ticker.yieldGain}}</td>
+          <td><button type="button" id="status_button_{{@index}}" class="status_button_{{ticker.symbol}} btn btn-outline-secondary status_button">{{ticker.status}}</button></td>
         </tr>
       {{/each}}
 <!-- 
