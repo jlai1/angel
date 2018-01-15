@@ -408,16 +408,20 @@ Template.body.events 'click #run_ml_button': (event) ->
       if Math.round(parseFloat(ml_result.risk)) is 1
         Session.set(quote.symbol+"_status", "Risk")
         $(".status_button_"+quote.symbol)[0].classList.add("btn-outline-danger")
+        $(".status_button_"+quote.symbol).text("Risk")
 
       else if Math.round(parseFloat(ml_result.buy)) is 1
         Session.set(quote.symbol+"_status", "Buy")
         $(".status_button_"+quote.symbol)[0].classList.add("btn-outline-success")
+        $(".status_button_"+quote.symbol).text("Buy")
       else if Math.round(parseFloat(ml_result.monitor)) is 1
         Session.set(quote.symbol+"_status", "Monitor")
         $(".status_button_"+quote.symbol)[0].classList.add("btn-outline-warning")
+        $(".status_button_"+quote.symbol).text("Monitor")
       else 
         Session.set(quote.symbol+"_status", "Monitor")
         $(".status_button_"+quote.symbol)[0].classList.add("btn-outline-warning")
+        $(".status_button_"+quote.symbol).text("Monitor")
     catch err
       console.log "error running ML"
 
@@ -439,15 +443,19 @@ Template.body.events 'click #run_ml_button': (event) ->
       if Math.round(parseFloat(ml_result.risk)) is 1
         Session.set(quote.symbol+"_status", "Risk")
         $(".status_button_"+quote.symbol)[0].classList.add("btn-outline-danger")
+        $(".status_button_"+quote.symbol).text("Risk")
       else if Math.round(parseFloat(ml_result.buy)) is 1
         Session.set(quote.symbol+"_status", "Buy")
         $(".status_button_"+quote.symbol)[0].classList.add("btn-outline-success")
+        $(".status_button_"+quote.symbol).text("Buy")
       else if Math.round(parseFloat(ml_result.monitor)) is 1
         Session.set(quote.symbol+"_status", "Monitor")
         $(".status_button_"+quote.symbol)[0].classList.add("btn-outline-warning")
+        $(".status_button_"+quote.symbol).text("Monitor")
       else 
         Session.set(quote.symbol+"_status", "Monitor")
         $(".status_button_"+quote.symbol)[0].classList.add("btn-outline-warning")
+        $(".status_button_"+quote.symbol).text("Monitor")
       # alert ml_result.risk + ",  " + ml_result.recommend + ", " + ml_result.watch
     catch err
       console.log "error running ML"
