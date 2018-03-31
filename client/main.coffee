@@ -473,11 +473,12 @@ Template.layout.events 'click #run_ml_button': (event) ->
 
 quotes_position = [
 
-  {'symbol': 'AMZN', 'position': 'long', 'size': '8', 'execPrice': '1512.45', 'boughtDate': '3/1/2018'}
-  {'symbol': 'T', 'position': 'long', 'size': '130', 'execPrice': '36.87', 'boughtDate': '3/1/2018'}
-  {'symbol': 'BA', 'position': 'long', 'size': '6', 'execPrice': '362.21', 'boughtDate': '3/1/2018'}
-  {'symbol': 'FB', 'position': 'long', 'size': '11', 'execPrice': '178.32', 'boughtDate': '3/1/2018'}
-  {'symbol': 'MSFT', 'position': 'long', 'size': '25', 'execPrice': '94.2', 'boughtDate': '3/1/2018'}
+    {'symbol': 'CASH_$$', 'position': 'long', 'size': '1', 'execPrice': '26000', 'boughtDate': '4/1/2018'}
+  # {'symbol': 'AMZN', 'position': 'long', 'size': '8', 'execPrice': '1512.45', 'boughtDate': '3/1/2018'}
+  # {'symbol': 'T', 'position': 'long', 'size': '130', 'execPrice': '36.87', 'boughtDate': '3/1/2018'}
+  # {'symbol': 'BA', 'position': 'long', 'size': '6', 'execPrice': '362.21', 'boughtDate': '3/1/2018'}
+  # {'symbol': 'FB', 'position': 'long', 'size': '11', 'execPrice': '178.32', 'boughtDate': '3/1/2018'}
+  # {'symbol': 'MSFT', 'position': 'long', 'size': '25', 'execPrice': '94.2', 'boughtDate': '3/1/2018'}
   # {'symbol': 'AMZN', 'position': 'long', 'size': '8', 'execPrice': '1413', 'boughtDate': '2/1/2018'}
   # # {'symbol': 'SPY', 'position': 'long', 'size': '15', 'execPrice': '275.45', 'boughtDate': '2/1/2018'}
   # {'symbol': 'T', 'position': 'long', 'size': '130', 'execPrice': '38.07', 'boughtDate': '2/1/2018'}
@@ -497,7 +498,9 @@ monthly_portfolio = [
   # {'symbol': 'SPY', 'position': 'long', 'size': '15', 'execPrice': '268.25'}
   {'period': '1/2018', 'starting_value': '18755', 'ending_value': '20435', 'net_gain_value': 'TBD', 'net_gain_percent':'TBD'}
   {'period': '2/2018', 'starting_value': '22499', 'ending_value': '23382', 'net_gain_value': 'TBD', 'net_gain_percent':'TBD'}
-  {'period': '3/2018', 'starting_value': '23382', 'ending_value': 'TBD', 'net_gain_value': 'TBD', 'net_gain_percent':'TBD'}
+  {'period': '3/2018', 'starting_value': '23382', 'ending_value': '26000', 'net_gain_value': 'TBD', 'net_gain_percent':'TBD'}
+  {'period': '4/2018', 'starting_value': '26000', 'ending_value': 'TBD', 'net_gain_value': 'TBD', 'net_gain_percent':'TBD'}
+
 ]
 
 
