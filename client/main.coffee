@@ -1,8 +1,13 @@
 import { Template } from 'meteor/templating'
 import { ReactiveVar } from 'meteor/reactive-var'
 import { Session } from 'meteor/session'
+import { Mongo } from 'meteor/mongo'
 
-import './main.html'
+Todos = new Mongo.Collection('todos');
+# Todos.insert({_id: 'my-todo-client'});
+todo = Todos.findOne({_id: 'my-todo'});
+console.log todo
+
 
 mlTrainingData = [
   {"input":{"dividendYield":0.0083102494,"roe":-0.0537},"output":{"risk":1}},
@@ -384,7 +389,7 @@ net = new (brain.NeuralNetwork)
 net.train(mlTrainingData)
 
 
-Template.body.events 'click #run_ml_button': (event) ->
+Template.layout.events 'click #run_ml_button': (event) ->
   # Run ML
   # runML(inputs[0])
 
@@ -423,7 +428,7 @@ Template.body.events 'click #run_ml_button': (event) ->
         $(".status_button_"+quote.symbol)[0].classList.add("btn-outline-warning")
         $(".status_button_"+quote.symbol).text("Monitor")
     catch err
-      console.log "error running ML"
+      # console.log "error running ML"
 
   quotes_sp500.forEach (quote) ->
     try
@@ -458,7 +463,7 @@ Template.body.events 'click #run_ml_button': (event) ->
         $(".status_button_"+quote.symbol).text("Monitor")
       # alert ml_result.risk + ",  " + ml_result.recommend + ", " + ml_result.watch
     catch err
-      console.log "error running ML"
+      # console.log "error running ML"
 
   # Meteor.call 'createPlayer'
 
@@ -467,18 +472,44 @@ Template.body.events 'click #run_ml_button': (event) ->
 # jsonStr = JSON.stringify(obj);
 
 quotes_position = [
-  {'symbol': 'AMZN', 'position': 'long', 'size': '4', 'execPrice': '1190'}
-  {'symbol': 'SPY', 'position': 'long', 'size': '15', 'execPrice': '268.25'}
-  {'symbol': 'T', 'position': 'long', 'size': '130', 'execPrice': '38.045'}
-  {'symbol': 'TGT', 'position': 'long', 'size': '76', 'execPrice': '66.125'}
+
+  {'symbol': 'AMZN', 'position': 'long', 'size': '8', 'execPrice': '1512.45', 'boughtDate': '3/1/2018'}
+  {'symbol': 'T', 'position': 'long', 'size': '130', 'execPrice': '36.87', 'boughtDate': '3/1/2018'}
+  {'symbol': 'BA', 'position': 'long', 'size': '6', 'execPrice': '362.21', 'boughtDate': '3/1/2018'}
+  {'symbol': 'FB', 'position': 'long', 'size': '11', 'execPrice': '178.32', 'boughtDate': '3/1/2018'}
+  {'symbol': 'MSFT', 'position': 'long', 'size': '25', 'execPrice': '94.2', 'boughtDate': '3/1/2018'}
+  # {'symbol': 'AMZN', 'position': 'long', 'size': '8', 'execPrice': '1413', 'boughtDate': '2/1/2018'}
+  # # {'symbol': 'SPY', 'position': 'long', 'size': '15', 'execPrice': '275.45', 'boughtDate': '2/1/2018'}
+  # {'symbol': 'T', 'position': 'long', 'size': '130', 'execPrice': '38.07', 'boughtDate': '2/1/2018'}
+  # {'symbol': 'BA', 'position': 'long', 'size': '6', 'execPrice': '333', 'boughtDate': '2/1/2018'}
+  # {'symbol': 'FB', 'position': 'long', 'size': '11', 'execPrice': '180', 'boughtDate': '2/1/2018'}
+  # {'symbol': 'MSFT', 'position': 'long', 'size': '25', 'execPrice': '90.7', 'boughtDate': '2/1/2018'}
+
+  # {'symbol': 'AMZN', 'position': 'long', 'size': '4', 'execPrice': '1190', 'boughtDate': '1/1/2018'}
+  # {'symbol': 'SPY', 'position': 'long', 'size': '15', 'execPrice': '268.25', 'boughtDate': '1/1/2018'}
+  # {'symbol': 'T', 'position': 'long', 'size': '130', 'execPrice': '38.045', 'boughtDate': '1/1/2018'}
+
+  # {'symbol': 'TGT', 'position': 'long', 'size': '76', 'execPrice': '66.125', 'boughtDate': '1/1/2018', 'soldDate': '2/1/2018'}
+]
+
+monthly_portfolio = [
+  # {'symbol': 'AMZN', 'position': 'long', 'size': '4', 'execPrice': '1190', 'period': '1/2018'}
+  # {'symbol': 'SPY', 'position': 'long', 'size': '15', 'execPrice': '268.25'}
+  {'period': '1/2018', 'starting_value': '18755', 'ending_value': '20435', 'net_gain_value': 'TBD', 'net_gain_percent':'TBD'}
+  {'period': '2/2018', 'starting_value': '22499', 'ending_value': '23382', 'net_gain_value': 'TBD', 'net_gain_percent':'TBD'}
+  {'period': '3/2018', 'starting_value': '23382', 'ending_value': 'TBD', 'net_gain_value': 'TBD', 'net_gain_percent':'TBD'}
 ]
 
 
 quotes_sp500 = [
+  {'symbol': 'FB'}
+  {'symbol': 'MSFT'}
+  {'symbol': 'NFLX'}
+  {'symbol': 'BA'}
+  {'symbol': 'HD'}
   {'symbol': 'IPG', 'name': 'Interpublic Group', 'category': 'Consumer Discretionary', 'subCategory': 'Advertising'}
   {'symbol': 'OMC', 'name': 'Omnicom Group', 'category': 'Consumer Discretionary', 'subCategory': 'Advertising'}
   {'symbol': 'ARNC', 'name': 'Arconic Inc', 'category': 'Industrials', 'subCategory': 'Aerospace & Defense'}
-  {'symbol': 'BA', 'name': 'Boeing Company', 'category': 'Industrials', 'subCategory': 'Aerospace & Defense'}
   {'symbol': 'GD', 'name': 'General Dynamics', 'category': 'Industrials', 'subCategory': 'Aerospace & Defense'}
   {'symbol': 'LLL', 'name': 'L-3 Communications Holdings', 'category': 'Industrials', 'subCategory': 'Aerospace & Defense'}
   {'symbol': 'LMT', 'name': 'Lockheed Martin Corp.', 'category': 'Industrials', 'subCategory': 'Aerospace & Defense'}
@@ -641,7 +672,7 @@ quotes_sp500 = [
   {'symbol': 'DG', 'name': 'Dollar General', 'category': 'Consumer Discretionary', 'subCategory': 'General Merchandise Stores'}
   {'symbol': 'DLTR', 'name': 'Dollar Tree', 'category': 'Consumer Discretionary', 'subCategory': 'General Merchandise Stores'}
   {'symbol': 'KSS', 'name': 'Kohl\'s Corp.', 'category': 'Consumer Discretionary', 'subCategory': 'General Merchandise Stores'}
-  # {'symbol': 'TGT', 'name': 'Target Corp.', 'category': 'Consumer Discretionary', 'subCategory': 'General Merchandise Stores'}
+  {'symbol': 'TGT', 'name': 'Target Corp.', 'category': 'Consumer Discretionary', 'subCategory': 'General Merchandise Stores'}
   {'symbol': 'NEM', 'name': 'Newmont Mining Corporation', 'category': 'Materials', 'subCategory': 'Gold'}
   {'symbol': 'ABC', 'name': 'AmerisourceBergen Corp', 'category': 'Health Care', 'subCategory': 'Health Care Distributors'}
   {'symbol': 'BMY', 'name': 'Bristol-Myers Squibb', 'category': 'Health Care', 'subCategory': 'Health Care Distributors'}
@@ -687,7 +718,6 @@ quotes_sp500 = [
   {'symbol': 'EA', 'name': 'Electronic Arts', 'category': 'Information Technology', 'subCategory': 'Home Entertainment Software'}
   {'symbol': 'LEG', 'name': 'Leggett & Platt', 'category': 'Consumer Discretionary', 'subCategory': 'Home Furnishings'}
   {'symbol': 'MHK', 'name': 'Mohawk Industries', 'category': 'Consumer Discretionary', 'subCategory': 'Home Furnishings'}
-  {'symbol': 'HD', 'name': 'Home Depot', 'category': 'Consumer Discretionary', 'subCategory': 'Home Improvement Retail'}
   {'symbol': 'LOW', 'name': 'Lowe\'s Cos.', 'category': 'Consumer Discretionary', 'subCategory': 'Home Improvement Retail'}
   {'symbol': 'DHI', 'name': 'D. R. Horton', 'category': 'Consumer Discretionary', 'subCategory': 'Homebuilding'}
   {'symbol': 'LEN', 'name': 'Lennar Corp.', 'category': 'Consumer Discretionary', 'subCategory': 'Homebuilding'}
@@ -750,13 +780,11 @@ quotes_sp500 = [
   {'symbol': 'ADP', 'name': 'Automatic Data Processing', 'category': 'Information Technology', 'subCategory': 'Internet Software & Services'}
   {'symbol': 'CTXS', 'name': 'Citrix Systems', 'category': 'Information Technology', 'subCategory': 'Internet Software & Services'}
   {'symbol': 'EBAY', 'name': 'eBay Inc.', 'category': 'Information Technology', 'subCategory': 'Internet Software & Services'}
-  {'symbol': 'FB', 'name': 'Facebook, Inc.', 'category': 'Information Technology', 'subCategory': 'Internet Software & Services'}
   {'symbol': 'FIS', 'name': 'Fidelity National Information Services', 'category': 'Information Technology', 'subCategory': 'Internet Software & Services'}
   {'symbol': 'FISV', 'name': 'Fiserv Inc', 'category': 'Information Technology', 'subCategory': 'Internet Software & Services'}
   {'symbol': 'INTU', 'name': 'Intuit Inc.', 'category': 'Information Technology', 'subCategory': 'Internet Software & Services'}
   {'symbol': 'MA', 'name': 'Mastercard Inc.', 'category': 'Information Technology', 'subCategory': 'Internet Software & Services'}
   {'symbol': 'NTAP', 'name': 'NetApp', 'category': 'Information Technology', 'subCategory': 'Internet Software & Services'}
-  {'symbol': 'NFLX', 'name': 'Netflix Inc.', 'category': 'Information Technology', 'subCategory': 'Internet Software & Services'}
   {'symbol': 'PAYX', 'name': 'Paychex Inc.', 'category': 'Information Technology', 'subCategory': 'Internet Software & Services'}
   {'symbol': 'CRM', 'name': 'Salesforce.com', 'category': 'Information Technology', 'subCategory': 'Internet Software & Services'}
   {'symbol': 'TSS', 'name': 'Total System Services', 'category': 'Information Technology', 'subCategory': 'Internet Software & Services'}
@@ -965,7 +993,6 @@ quotes_sp500 = [
   {'symbol': 'ULTA', 'name': 'Ulta Salon Cosmetics & Fragrance Inc', 'category': 'Consumer Discretionary', 'subCategory': 'Specialty Stores'}
   {'symbol': 'NUE', 'name': 'Nucor Corp.', 'category': 'Materials', 'subCategory': 'Steel'}
   {'symbol': 'CA', 'name': 'CA, Inc.', 'category': 'Information Technology', 'subCategory': 'Systems Software'}
-  {'symbol': 'MSFT', 'name': 'Microsoft Corp.', 'category': 'Information Technology', 'subCategory': 'Systems Software'}
   {'symbol': 'RHT', 'name': 'Red Hat Inc.', 'category': 'Information Technology', 'subCategory': 'Systems Software'}
   {'symbol': 'AAPL', 'name': 'Apple Inc.', 'category': 'Information Technology', 'subCategory': 'Technology Hardware, Storage & Peripherals'}
   {'symbol': 'HPE', 'name': 'Hewlett Packard Enterprise', 'category': 'Information Technology', 'subCategory': 'Technology Hardware, Storage & Peripherals'}
@@ -1145,7 +1172,7 @@ getMe = (quote, ticker_tag) ->
 # generated by js2coffee 2.2.0
 
 
-Template.body.helpers tasks: [
+Template.layout.helpers tasks: [
   { text: 'This is task 1' }
   { text: 'This is task 2' }
   { text: 'This is task 3' }
@@ -1216,6 +1243,100 @@ Template.dashboard.helpers portfolioDeltaPercent: ->
   Session.set("portfolioDelta", deltaPercent) 
   deltaPercent
 
+# Template.dashboard.helpers mongoTask: ->
+#   Tasks.find({})
+
+# {'period': '1/2018', 'starting_value': '18755', 'ending_value': '20345', 'net_gain_value': '1590', 'net_gain_percent':'8.48'}
+Template.dashboard.helpers monthly_portfolio: (index) -> 
+
+
+  quotes_table_arr = []
+
+
+  # Run open position quotes
+  monthly_portfolio.forEach (quote) ->
+
+    try
+      period = quote.period
+      starting_value = parseFloat(quote.starting_value)
+      ending_value = parseFloat(quote.ending_value)
+
+      net_gain_value = ending_value - starting_value
+      net_gain_percent = parseFloat(100*net_gain_value/starting_value).toFixed(2)
+
+      # price_current = parseFloat Session.get(quote.symbol+"_price")
+      # price_day50 = (parseFloat Session.get(quote.symbol).day50MovingAvg).toFixed(2)
+      # dividend = (parseFloat Session.get(quote.symbol).dividendYield).toFixed(2)
+      # date = "Today"
+      # roe = parseFloat Session.get(quote.symbol).returnOnEquity
+      # sector = Session.get(quote.symbol+"_company").sector
+      # industry = Session.get(quote.symbol+"_company").industry
+      # company_name = Session.get(quote.symbol+"_company").companyName
+      # exec_price = parseFloat quote.execPrice
+      # size = parseFloat quote.size
+      # yieldPercent = (100 * (price_current-exec_price)/price_current).toFixed(2)
+      # yieldGain = ((price_current-exec_price) * size ).toFixed(2)
+      # ml_status = Session.get(quote.symbol+"_status")
+      # portfolio_value = parseFloat Session.get("portfolioValue")      
+      # portfolio_composition = (100 * (size * price_current) / portfolio_value).toFixed(2)
+      # status = Session.get(quote.symbol+"_status")
+
+    catch err
+      period = "-"
+      starting_value = "-"
+      ending_value = "-"
+
+      net_gain_value = "-"
+      net_gain_percent = "-"
+      # console.log "Error: " + err
+      # period = "-"
+      # price_current = "-"
+      # price_day50 = "-"
+      # dividend = "-"
+      # date = "-"
+      # roe = "-"
+      # sector = "-"
+      # industry = "-"
+      # company_name = "-"
+      # yieldPercent = "-"
+      # yieldGain = "-"
+      # ml_status = "-"
+      # portfolio_composition = "-"
+
+
+    quote_table_row = {ticker: { "period": period, "starting_value": starting_value, "ending_value": ending_value, "net_gain_value": net_gain_value, "net_gain_percent": net_gain_percent}}
+    quotes_table_arr.push(quote_table_row)    
+  return quotes_table_arr
+
+  # monthly_portfolio_table_arr = []
+
+
+  # # Run open position quotes
+  # monthly_portfolio.forEach (item) ->
+  #   console.log item
+
+  #   try
+  #     period = item.period
+  #     starting_value = item.starting_value
+  #     ending_value = item.ending_value
+  #     net_gain_value = item.net_gain_value
+  #     net_gain_percent = item.net_gain_percent
+    
+
+  #   catch err
+  #     # console.log "Error: " + err
+  #     period = "-"
+  #     starting_value = "-"
+  #     ending_value = "-"
+  #     net_gain_value = "-"
+  #     net_gain_percent = "-"
+
+
+  #   monthly_portfolio_table_row = {monthly_portfolio: { "period":period, "starting_value":starting_value, "ending_value":ending_value, "net_gain_value":net_gain_value, "net_gain_percent": net_gain_percent}}
+  #   monthly_portfolio_table_arr.push(monthly_portfolio_table_row) 
+
+  # return monthly_portfolio_table_arr
+
 Template.dashboard.helpers tickers: (index) -> 
 
   quotes_table_arr = []
@@ -1226,8 +1347,8 @@ Template.dashboard.helpers tickers: (index) ->
 
     try
       price_current = parseFloat Session.get(quote.symbol+"_price")
-      price_day50 = parseFloat Session.get(quote.symbol).day50MovingAvg
-      dividend = parseFloat Session.get(quote.symbol).dividendYield
+      price_day50 = (parseFloat Session.get(quote.symbol).day50MovingAvg).toFixed(2)
+      dividend = (parseFloat Session.get(quote.symbol).dividendYield).toFixed(2)
       date = "Today"
       roe = parseFloat Session.get(quote.symbol).returnOnEquity
       sector = Session.get(quote.symbol+"_company").sector
@@ -1238,10 +1359,12 @@ Template.dashboard.helpers tickers: (index) ->
       yieldPercent = (100 * (price_current-exec_price)/price_current).toFixed(2)
       yieldGain = ((price_current-exec_price) * size ).toFixed(2)
       ml_status = Session.get(quote.symbol+"_status")
+      portfolio_value = parseFloat Session.get("portfolioValue")      
+      portfolio_composition = (100 * (size * price_current) / portfolio_value).toFixed(2)
       # status = Session.get(quote.symbol+"_status")
 
     catch err
-      console.log "Error: " + err
+      # console.log "Error: " + err
       price_current = "-"
       price_day50 = "-"
       dividend = "-"
@@ -1253,9 +1376,10 @@ Template.dashboard.helpers tickers: (index) ->
       yieldPercent = "-"
       yieldGain = "-"
       ml_status = "-"
+      portfolio_composition = "-"
 
 
-    quote_table_row = {ticker: { "symbol":quote.symbol, "name":company_name, "category":sector, "subCategory":industry, "date": date, "currentPrice": price_current, "price_day50": price_day50, "dividend": dividend, "roe": roe, "position": quote.position, "size": quote.size, "execPrice": quote.execPrice, "yieldPercent": yieldPercent, "yieldGain": yieldGain, "status": ml_status}}
+    quote_table_row = {ticker: { "symbol":quote.symbol, "name":company_name, "category":sector, "subCategory":industry, "date": date, "currentPrice": price_current, "price_day50": price_day50, "dividend": dividend, "roe": roe, "position": quote.position, "size": quote.size, "execPrice": quote.execPrice, "yieldPercent": yieldPercent, "yieldGain": yieldGain, "portfolioComposition": portfolio_composition, "status": ml_status}}
     quotes_table_arr.push(quote_table_row)    
 
 
@@ -1284,8 +1408,8 @@ Template.dashboard.helpers tickers: (index) ->
 
     try
       price_current = parseFloat Session.get(quote.symbol+"_price")
-      price_day50 = parseFloat Session.get(quote.symbol).day50MovingAvg
-      dividend = parseFloat Session.get(quote.symbol).dividendYield
+      price_day50 = (parseFloat Session.get(quote.symbol).day50MovingAvg).toFixed(2)
+      dividend = (parseFloat Session.get(quote.symbol).dividendYield).toFixed(2)
       date = "Today"
       roe = Session.get(quote.symbol).returnOnEquity
       sector = Session.get(quote.symbol+"_company").sector
@@ -1297,7 +1421,7 @@ Template.dashboard.helpers tickers: (index) ->
       # dividend = Object.values(Session.get(quote.symbol)["Monthly Adjusted Time Series"])[0]["7. dividend amount"]
       # date = Object.keys(Session.get(quote.symbol)["Monthly Adjusted Time Series"])[0]
     catch err
-      console.log "Error: " + err
+      # console.log "Error: " + err
       price_current = "-"
       price_day50 = "-"
       dividend = "-"
@@ -1365,7 +1489,8 @@ Template.dashboard.helpers tickers: (index) ->
 #     alert "hahahaha"
 #   return
 
-Template.body.events 'keypress #ticker_searchbox': (event) ->
+# alert "hello world"
+Template.layout.events 'keypress #ticker_searchbox': (event) ->
   # Prevent default browser form submit
   # alert "hahahaha"
   console.log event.which
@@ -1377,19 +1502,20 @@ Template.body.events 'keypress #ticker_searchbox': (event) ->
     # win.focus()
   return
 
-Template.body.events 'click #ticker_table_header': (event) ->
+Template.layout.events 'click #ticker_table_header': (event) ->
   # Prevent default browser form submit
   # alert "hahahaha"
   # alert "hahahaha"
+  $('#ticker_table').tablesorter()
   $('#ticker_table').trigger("update");
   return
 
 
-Template.body.events 'click #ml_model_button': (event) ->
+Template.layout.events 'click #ml_model_button': (event) ->
   alert JSON.stringify(mlTrainingData)
 
 
-Template.body.events 'click .follow_button': (event) ->
+Template.layout.events 'click .follow_button': (event) ->
   console.log "event: "
   # grey (Follow) -> blue (Unfollow) -> green (strong) -> red (risk)
   if $("#"+event.target.id)[0].classList.contains("btn-outline-secondary")
@@ -1401,7 +1527,7 @@ Template.body.events 'click .follow_button': (event) ->
     $("#"+event.target.id)[0].classList.add("btn-outline-secondary") 
     $("#"+event.target.id).text("Follow")
 
-Template.body.events 'click .status_button': (event) ->
+Template.layout.events 'click .status_button': (event) ->
   console.log "event: "
   # $("#"+event.target.id)
   # grey (unwatch) -> yellow (watch) -> green (strong) -> red (risk)
@@ -1468,7 +1594,7 @@ Template.body.events 'click .status_button': (event) ->
 # generated by js2coffee 2.2.0
 
 $(document).ready ->
-  $('#ticker_table').tablesorter()
+  # $('#ticker_table').tablesorter()
   console.log "ticker table ready sortableeeeeeeeeeee"
 
   # # Run ML
@@ -1506,8 +1632,47 @@ Template.hello.events 'click button': (event, instance) ->
   return
 
 
+FlowRouter.route '/',
+  name: 'Dashboard.show'
+  action: (params, queryParams) ->
+    # BlazeLayout.render  'layout1', main: 'dashboard'
+    BlazeLayout.render 'layout', main: 'dashboard'
+    console.log ' / Routing here.'
+
+
+FlowRouter.route '/visualization',
+  name: 'Visualization.show'
+  action: (params, queryParams) ->
+    # BlazeLayout.render  'layout1', main: 'dashboard'
+    BlazeLayout.render 'layout', main: 'visualization'
+    console.log ' /visualization Routing here.'
+
+FlowRouter.route '/visualization2',
+  name: 'Visualization2.show'
+  action: (params, queryParams) ->
+    # BlazeLayout.render  'layout1', main: 'dashboard'
+    BlazeLayout.render 'layout', main: 'visualization2'
+    console.log ' /visualization2 Routing here.'
+
+
+FlowRouter.route '/visualization3',
+  name: 'Visualization3.show'
+  action: (params, queryParams) ->
+    # BlazeLayout.render  'layout1', main: 'dashboard'
+    BlazeLayout.render 'layout', main: 'visualization3'
+    console.log ' /visualization3 Routing here.'
+
+FlowRouter.route '/visualization4',
+  name: 'Visualization4.show'
+  action: (params, queryParams) ->
+    # BlazeLayout.render  'layout1', main: 'dashboard'
+    BlazeLayout.render 'layout', main: 'visualization4'
+    console.log ' /visualization4 Routing here.'
+
 
 
 
 # ---
 # generated by js2coffee 2.2.0
+
+

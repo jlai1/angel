@@ -1,8 +1,14 @@
 import { Meteor } from 'meteor/meteor'
 import { HTTP } from 'meteor/http'
+import { Mongo } from 'meteor/mongo'
 
 brain = ""
 net = ""
+
+# Todos = new Mongo.Collection('todos');
+# Todos.insert({_id: 'my-todo'});
+# todo = Todos.findOne({_id: 'my-todo'});
+# console.log(todo);
 
 mlTrainingData = [
   {"input":{"dividendYield":0.0083102494,"roe":-0.0537},"output":{"risk":1}},
@@ -678,6 +684,11 @@ Meteor.methods 'getTicker': (ticker_name) ->
   console.log "ending: " + company
   return company
 # return
+
+
+
+    
+
 
 
 	# ---

@@ -4,17 +4,94 @@
 
 <body>
   <h1 class="display-4">Angel Trading - Live Dashboard</h1>
-  {{> dashboard}}
+    {{> layout}}
+  <!-- {{> dashboard}} -->
 </body>
 
+<template name="layout">
+  {{> Template.dynamic template=main}}
+</template>
+
+
+
+
+
+
+<template name="visualization">
+  visualization
+  <h1 align="right">Visualization {{visualization}}</h1>
+  <svg height="100px">
+  </svg>
+  <!-- <div id="circles"></div> -->
+</template>
+
+
+<template name="visualization2">
+  visualization2
+  <h1 align="right">Visualization {{visualization}}</h1>
+  <svg height="200px">
+  </svg>
+  <!-- <div id="circles"></div> -->
+</template>
+
+<template name="visualization3">
+  visualization3
+  <h1 align="right">Visualization {{visualization}}</h1>
+  <svg height="300px">
+  </svg>
+  <!-- <div id="circles"></div> -->
+</template>
+
+<template name="visualization4">
+  visualization4
+  <h1 align="right">Visualization {{visualization}}</h1>
+  <svg height="400px">
+  </svg>
+  <!-- <div id="circles"></div> -->
+</template>
 
 <template name="dashboard">
-  <h1 align="right">Value: ${{portfolioValue}}, Cost: ${{portfolioCost}}</h1>
+  <h1 align="right">This month's Current Value: ${{portfolioValue}}, Starting value: ${{portfolioCost}}</h1>
   <h1 align="right">Δ: ${{portfolioDelta}}, Δ%: {{portfolioDeltaPercent}}% </h1>
   <div class="form-group">
     <!-- <input type="text" class="form-control" id="ticker_searchbox"> -->
-    <input id="ticker_searchbox" type="text" class="form-control"/><button type="button" id="ml_model_button" class="btn btn-outline-info">Training ML</button><button type="button" id="run_ml_button" class="btn btn-outline-info">Run ML</button>
+    <input id="ticker_searchbox" type="text" class="form-control"/><button type="button" id="ml_model_button" class="btn btn-outline-info">Training ML</button><button type="button" id="run_ml_button" class="btn btn-outline-info">Run ML</button><button type="button" id="visualize_button" class="btn btn-outline-info">Visualize</button>
   </div>
+
+
+  <table id="monthly_portfolio_table" class="table table-bordered tablesorter">
+    <thead>
+      <tr id="monthly_portfolio_table_header">
+        <th>#</th>
+        <th>Period</th>
+        <th>Starting Value ($)</th>
+        <th>Ending Value ($)</th>
+        <th>Net Gain ($)</th>
+        <th>Net Gain (%)</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      {{#each monthly_portfolio}}
+        <tr>
+          <th scope="row">{{@index}}</th>
+          <!-- <td>{{ticker.name}}</td> -->
+          <td>{{ticker.period}}</td>
+          <td>{{ticker.starting_value}}</td>
+          <td>{{ticker.ending_value}}</td>
+          <td>{{ticker.net_gain_value}}</td>
+          <td>{{ticker.net_gain_percent}}</td>
+<!--           <td>{{monthly_portfolio.period}}</td>
+          <td>{{monthly_portfolio.starting_value}}</td>
+          <td>{{monthly_portfolio.ending_value}}</td>
+          <td>{{monthly_portfolio.net_gain_value}}</td>
+          <td>{{monthly_portfolio.net_gain_percent}}}</td> -->
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+
   <table id="ticker_table" class="table table-bordered table-inverse tablesorter">
     <thead>
       <tr id="ticker_table_header">
@@ -24,7 +101,7 @@
         <th>Name</th>
         <th>Sector</th>
         <th>Industry</th>
-        <th>Date</th>
+        <!-- <th>Date</th> -->
         <th>Current Price ($)</th>
         <th>50 days ave ($)</th>
         <th>Dividend Yield (%)</th>
@@ -34,6 +111,7 @@
         <th>Exec Price</th>
         <th>Yield (%)</th>
         <th>Yield ($)</th>
+        <th>Portfolio Composition (%)</th>
         <th>ML</th>
 
       </tr>
@@ -48,7 +126,7 @@
           <td>{{ticker.name}}</td>
           <td>{{ticker.category}}</td>
           <td>{{ticker.subCategory}}</td>
-          <td>{{ticker.date}}</td>
+          <!-- <td>{{ticker.date}}</td> -->
           <td>{{ticker.currentPrice}}</td>
           <td>{{ticker.price_day50}}</td>
           <td>{{ticker.dividend}}</td>
@@ -58,6 +136,7 @@
           <td>{{ticker.execPrice}}</td>
           <td>{{ticker.yieldPercent}}</td>
           <td>{{ticker.yieldGain}}</td>
+          <td>{{ticker.portfolioComposition}}</td>
           <td><button type="button" id="status_button_{{@index}}" class="status_button_{{ticker.symbol}} btn btn-outline-secondary status_button">{{ticker.status}}</button></td>
         </tr>
       {{/each}}
