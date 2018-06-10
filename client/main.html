@@ -1,18 +1,18 @@
 <head>
   <title>angel_trading</title>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
 </head>
 
 <body>
   <h1 class="display-4">Angel Trading - Live Dashboard</h1>
     {{> layout}}
   <!-- {{> dashboard}} -->
+
 </body>
 
 <template name="layout">
   {{> Template.dynamic template=main}}
 </template>
-
-
 
 
 
@@ -55,7 +55,42 @@
   <h1 align="right">Δ: ${{portfolioDelta}}, Δ%: {{portfolioDeltaPercent}}% </h1>
   <div class="form-group">
     <!-- <input type="text" class="form-control" id="ticker_searchbox"> -->
-    <input id="ticker_searchbox" type="text" class="form-control"/><button type="button" id="ml_model_button" class="btn btn-outline-info">Training ML</button><button type="button" id="run_ml_button" class="btn btn-outline-info">Run ML</button><button type="button" id="visualize_button" class="btn btn-outline-info">Visualize</button>
+    <input id="ticker_searchbox" type="text" class="form-control"/><button type="button" id="ml_model_button" class="btn btn-outline-info">Training ML</button><button type="button" id="run_ml_button" class="btn btn-outline-info">Run ML</button><button type="button" id="visualize_button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal">Visualize</button>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" id="today_button" class="btn btn-outline-info">Today</button>
+            <button type="button" id="50_day_moving_average_button" class="btn btn-outline-info">50 Day</button>
+            <button type="button" id="200_day_moving_average_button" class="btn btn-outline-info">200 Day</button>
+            <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="test-div" height="">d3 visualization here....</div>
+
+
+            <div class="container">
+
+<!--               <a id="hover-text" href="#" data-toggle="tooltip" title="Hooray!">Hover over me</a>
+              <a id="hover-text2" href="#">New</a> -->
+              <!-- <div class="example_div"></div> -->
+            </div>
+
+
+            <svg class="svg-content"></svg>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
 
